@@ -23,15 +23,16 @@ function createGrid(axisAmount) {
 }
 function hoverColorChange() {
     divgridList = document.getElementsByClassName("grid");
-    let brightness = 100;
+    
     for (i=divgridList.length - 1; i>=0; i--) {
+        let brightness = 100;
         divgridList[i].addEventListener("mouseover", function(e) {
             let randomColor = Math.floor(Math.random()*16777215).toString(16);
             if (e.target.style.backgroundColor == "") { 
                 e.target.style.backgroundColor = `#${randomColor}`;   
             } else {
-                e.target.style.filter = `brightness(${brightness-10}%)`;
-                brightness -= 10;
+                e.target.style.filter = `brightness(${brightness}%)`;
+                brightness -= 20;
             }
             
         }) 
