@@ -1,10 +1,16 @@
-axisAmount = 16;
+let axisAmount = 16;
+const container = document.getElementById("container");
+let divgridList = document.getElementsByClassName("grid")
 for (let i=1; i <= axisAmount**2; i++) {
     divgrid = document.createElement("div");
     container.appendChild(divgrid);
-    divgrid.classList.add("grid")
+    divgrid.classList.add("grid");
 }
-resetAndCreateGrid();
+hoverColorChange();
+
+
+
+
 
 
 
@@ -15,15 +21,36 @@ function createGrid(axisAmount) {
         divgrid.classList.add("grid")
     }
 }
-function resetAndCreateGrid() {
-    document.getElementById("reset").addEventListener("click", function(e) {
-        for (let i=divgridList.length-1; i >= 0; i--) {
-            container.removeChild(divgridList[i]);
-        }
-        axisAmount = prompt("How many squares per side should the grid be?")
-        createGrid(axisAmount)
-        document.documentElement.style.setProperty("--axisAmount", axisAmount)
-    })
+function hoverColorChange() {
+    divgridList = document.getElementsByClassName("grid");
+    let brightness = 100;
+    for (i=divgridList.length - 1; i>=0; i--) {
+        divgridList[i].addEventListener("mouseover", function(e) {
+            let randomColor = Math.floor(Math.random()*16777215).toString(16);
+            if (e.target.style.backgroundColor == "") { 
+                e.target.style.backgroundColor = `#${randomColor}`;   
+            } else {
+                e.target.style.filter = `brightness(${brightness-10}%)`;
+                brightness -= 10;
+            }
+            
+        }) 
+        
+    }
 }
-container = document.getElementById("container");
-divgridList = document.getElementsByClassName("grid");
+
+
+
+
+
+
+
+document.getElementById("reset").addEventListener("click", function(e) {
+    for (let i=divgridList.length-1; i >= 0; i--) {
+        container.removeChild(divgridList[i]);
+    }
+    axisAmount = prompt("How many squares per side should the grid be?")
+    createGrid(axisAmount)
+    document.documentElement.style.setProperty("--axisAmount", axisAmount)
+    hoverColorChange();
+})
