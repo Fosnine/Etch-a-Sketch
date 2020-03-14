@@ -32,7 +32,7 @@ function hoverColorChange() {
                 e.target.style.backgroundColor = `#${randomColor}`;   
             } else {
                 e.target.style.filter = `brightness(${brightness}%)`;
-                brightness -= 20;
+                brightness -= 10;
             }
             
         }) 
@@ -51,6 +51,9 @@ document.getElementById("reset").addEventListener("click", function(e) {
         container.removeChild(divgridList[i]);
     }
     axisAmount = prompt("How many squares per side should the grid be?")
+    while (axisAmount > 100 || axisAmount < 2) {
+        axisAmount = prompt("This is an invalid amount. Please input an amount between 2 and 100.")
+    }
     createGrid(axisAmount)
     document.documentElement.style.setProperty("--axisAmount", axisAmount)
     hoverColorChange();
