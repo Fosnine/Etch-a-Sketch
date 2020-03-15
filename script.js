@@ -46,13 +46,21 @@ function hoverColorChange() {
 
 
 
-document.getElementById("reset").addEventListener("click", function(e) {
+document.getElementById("gridSize").addEventListener("click", function(e) {
     for (let i=divgridList.length-1; i >= 0; i--) {
         container.removeChild(divgridList[i]);
     }
     axisAmount = prompt("How many squares per side should the grid be?")
     while (axisAmount > 100 || axisAmount < 2) {
         axisAmount = prompt("This is an invalid amount. Please input an amount between 2 and 100.")
+    }
+    createGrid(axisAmount)
+    document.documentElement.style.setProperty("--axisAmount", axisAmount)
+    hoverColorChange();
+})
+document.getElementById("reset").addEventListener("click", function(e) {
+    for (let i=divgridList.length-1; i >= 0; i--) {
+        container.removeChild(divgridList[i]);
     }
     createGrid(axisAmount)
     document.documentElement.style.setProperty("--axisAmount", axisAmount)
